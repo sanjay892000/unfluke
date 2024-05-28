@@ -27,8 +27,6 @@ const SearchContainer = styled('div')(({ theme }) => ({
 function Scanner() {
   const [loading, setLoading] = useState(true);
   const [option, setOption] = useState('');
-  const [selectedOptions, setSelectedOptions] = useState(['LTP', '>', 'SMA']);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -188,7 +186,7 @@ function Scanner() {
           </Grid>
           <Box mt={4}>
             <Paper variant="outlined" className="selected-options">
-              {selectedOptions.map((option, index) => (
+              {['LTP', '>', 'SMA'].map((option, index) => (
                 <Chip key={index} label={option} onDelete={() => { }} className="chip" />
               ))}
             </Paper>
