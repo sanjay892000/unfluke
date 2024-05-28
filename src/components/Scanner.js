@@ -88,7 +88,7 @@ function Scanner() {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography variant="h6">Filter</Typography>
-              <FormControl fullWidth margin="normal">
+              <FormControl fullWidth margin="normal" >
                 <Box sx={{ minWidth: 120 }} display="flex" justifyContent="space-between">
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Options</InputLabel>
@@ -147,7 +147,7 @@ function Scanner() {
             </Grid>
             <Grid item xs={12} sm={5}>
               <Typography variant="h6">Operations</Typography>
-              <Box display="flex" flexDirection="column">
+              <Box display="flex" flexDirection="column" className="containers" component={Paper} elevation={3}>
                 <Box display="flex" justifyContent="space-between" mb={1}>
                   {['+', '-', '*', '/'].map((op, index) => (
                     <Button key={index} variant="outlined" className="operation-button">
