@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
+import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
+import { gsap } from 'gsap';
+import { Skeleton } from '@mui/material';
 import '../style/dashboard.css'; // Import the CSS for animations
 
 const rows = [
@@ -20,10 +21,31 @@ const rows = [
 ];
 
 export default function DashBoard() {
-  const nodeRef = useRef(null);
+  const tableBodyRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a network request
+    setTimeout(() => {
+      setLoading(false);
+      if (tableBodyRef.current) {
+        gsap.fromTo(
+          tableBodyRef.current.children,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power3.out',
+          }
+        );
+      }
+    }, 1000);
+  }, []);
 
   return (
-    <div className="Container">
+    <Box className="Containerp" component={Paper} elevation={3}>
       <div className="topcontent">
         <p>Basic Backtest</p>
         <div className="Slippage">
@@ -59,33 +81,45 @@ export default function DashBoard() {
               <TableCell><span className="table-head"> Action </span></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            <TransitionGroup component={null}>
-              {rows.map((row) => (
-                <CSSTransition nodeRef={nodeRef} key={row.id} timeout={500} classNames="fade">
-                  <TableRow className='tablebody'>
-                    <TableCell><Box className="rank">{row.id}</Box></TableCell>
-                    <TableCell>
-                      <Box display="flex" alignItems="center">
-                        {row.name}</Box>
-                    </TableCell>
-                    <TableCell><TrendingUpOutlinedIcon className="growgraph" /> {row.cratio}</TableCell>
-                    <TableCell>{row.oprofit}</TableCell>
-                    <TableCell>{row.avgdprofit}</TableCell>
-                    <TableCell>{row.winpday}</TableCell>
-                    <TableCell>{row.price ? row.price : '-'}</TableCell>
-                    <TableCell>
-                      <button className="action-button">
-                        {row.action}
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                </CSSTransition>
-              ))}
-            </TransitionGroup>
+          <TableBody ref={tableBodyRef}>
+            {loading ? (
+              Array.from(new Array(10)).map((_, index) => (
+                <TableRow key={index}>
+                  <TableCell><Skeleton variant="text" width={40} /></TableCell>
+                  <TableCell><Skeleton variant="text" width={140} /></TableCell>
+                  <TableCell><Skeleton variant="text" width={60} /></TableCell>
+                  <TableCell><Skeleton variant="text" width={80} /></TableCell>
+                  <TableCell><Skeleton variant="text" width={80} /></TableCell>
+                  <TableCell><Skeleton variant="text" width={40} /></TableCell>
+                  <TableCell><Skeleton variant="text" width={40} /></TableCell>
+                  <TableCell><Skeleton variant="rectangular" width={60} height={30} /></TableCell>
+                </TableRow>
+              ))
+            ) : (
+              rows.map((row) => (
+                <TableRow key={row.id} className="tablebody">
+                  <TableCell><Box className="rank">{row.id}</Box></TableCell>
+                  <TableCell>
+                    <Box display="flex" alignItems="center">
+                      {row.name}
+                    </Box>
+                  </TableCell>
+                  <TableCell><TrendingUpOutlinedIcon className="growgraph" /> {row.cratio}</TableCell>
+                  <TableCell>{row.oprofit}</TableCell>
+                  <TableCell>{row.avgdprofit}</TableCell>
+                  <TableCell>{row.winpday}</TableCell>
+                  <TableCell>{row.price ? row.price : '-'}</TableCell>
+                  <TableCell>
+                    <button className="action-button">
+                      {row.action}
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 }

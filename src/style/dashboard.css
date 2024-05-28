@@ -1,93 +1,92 @@
-.Container {
-    padding: 0px 25px;
+.Containerp {
+  padding: 20px;
+  margin: 20px;
 }
 
-.Container p {
-    font-size: 25px;
-    font-weight: 600;
-    color: rgb(22, 22, 104);
+.topcontent p {
+  font-size: 25px;
+  font-weight: 600;
+  color: rgb(22, 22, 104);
 }
-.topcontent{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+.topcontent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -20px;
 }
-.Slippage{
-    display: flex;
-    gap: 5px;
-    background: #ffffff;
-    border-radius: 5px;
+
+.Slippage {
+  display: flex;
+  gap: 5px;
+  background: #ffffff;
+  border-radius: 5px;
 }
-.Slippage span{
-   /*  border: 1px solid rgb(244, 255, 244); */
-    padding: 8px 10px;
-    background: #a9b5fb;
-    border-radius: 5px 0px 0px 5px;
-    font-size: 15px;
-    font-weight: 500;
+
+.Slippage span {
+  padding: 8px 10px;
+  background: #a9b5fb;
+  border-radius: 5px 0px 0px 5px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .tablehead {
-    background-color: rgba(89, 106, 255, 0.2);
+  background-color: rgba(89, 106, 255, 0.2);
 }
 
 .table-head {
-    color: rgb(20, 8, 115);
-    font-size: 15px;
-    font-weight: 600;
+  color: rgb(20, 8, 115);
+  font-size: 15px;
+  font-weight: 600;
 }
 
-
 .tablebody {
-    background-color: rgb(243, 243, 243);
-    transition: background-color 0.3s ease;
+  background-color: rgb(243, 243, 243);
+  transition: all 0.5s ease-out;
 }
 
 .tablebody:hover {
-    background-color: rgb(209, 214, 255);
-    scale: 0.997;
+  background-color: rgb(209, 214, 255);
+  transform: scale(0.997);
 }
 
 .rank {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .growgraph {
-    margin-bottom: -10px;
-    color: green;
+  margin-bottom: -10px;
+  color: green;
 }
-.fade-enter {
-    opacity: 0.01;
-    transform: translateY(-20px);
-  }
-  .fade-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 500ms ease-in, transform 500ms ease-in;
-  }
-  .fade-exit {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .fade-exit-active {
-    opacity: 0.01;
-    transform: translateY(-20px);
-    transition: opacity 500ms ease-in, transform 500ms ease-in;
-  }
 
-  .action-button {
-    background-color: rgba(20, 8, 115, 0.9);
-    color: white;
-    border-radius: 4px;
-    height: 30px;
-    width: 60px;
-    border: none;
-    padding: 4px 8px;
-    cursor: pointer;
+.action-button {
+  background-color: rgba(20, 8, 115, 0.9);
+  color: white;
+  border-radius: 4px;
+  height: 30px;
+  width: 60px;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: rgba(20, 8, 115, 1);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+  background-size: 2000px 100%;
+  animation: skeletonShimmer 1.5s infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -1000px 0;
   }
-  
-  .action-button:hover {
-    background-color: rgba(20, 8, 115, 1);
+  100% {
+    background-position: 1000px 0;
   }
-  
+}

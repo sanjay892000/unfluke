@@ -1,0 +1,70 @@
+.containers {
+  padding: 20px;
+  margin: 20px;
+}
+.container1 {
+  padding: 20px;
+  height: 310px;
+}
+
+.searchcontainer {
+  position: relative;
+}
+
+.searchicon {
+  position: absolute;
+ right:10px;
+}
+.action-buttons {
+  background-color: rgba(20, 8, 115, 0.9);
+  color: white;
+  border-radius: 4px;
+  height:40px;
+  width: 80px;
+  border: none;
+  padding: 4px 8px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.action-buttons:hover {
+  background-color: rgba(20, 8, 115, 1);
+}
+
+.filter-button,
+.operation-button {
+  margin-bottom: 8px;
+}
+
+.filter-button {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.operation-button {
+  width: 32%;
+}
+
+.selected-options {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.chip {
+  margin-right: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.MuiButton-root {
+  animation: fadeIn 0.5s ease-in;
+}
