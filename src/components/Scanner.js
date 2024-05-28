@@ -1,35 +1,45 @@
-import React, { useState } from 'react';
-import { TextField, Box, Button, MenuItem, Select, InputLabel, FormControl, Switch, Typography, Paper, Grid, Chip, List, ListItem, ListItemText } from '@mui/material';
-import { Skeleton } from '@mui/lab';
+import React, { useState, useEffect } from 'react';
+import {
+  TextField, Box, Button, MenuItem, Select, InputLabel,
+  FormControl, Switch, Typography, Paper, Grid, Chip, List, ListItem, ListItemText
+} from '@mui/material';
+import { Skeleton } from '@mui/material';
 import '../style/scanner.css';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
+
 const options = [
   "MACD", "Money Flow Index (MFI)", "Volume Weighted Average Price (VWAP)",
   "Rate of change (ROC)", "Relative Strength Index (RSI)", "1 day Rate Of Change (ROC)"
 ];
+
 const AdvancedList = styled(List)(({ theme }) => ({
   maxHeight: 200,
   overflowY: 'auto',
 }));
+
 const SearchContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   marginBottom: theme.spacing(2),
 }));
 
-
 function Scanner() {
   const [loading, setLoading] = useState(true);
-  const [option, setoption] = React.useState('');
+  const [option, setOption] = useState('');
   const [selectedOptions, setSelectedOptions] = useState(['LTP', '>', 'SMA']);
-  const handleChange = (event) => {
-    setoption(event.target.value);
-  };
-  setTimeout(() => {
-    setLoading(false);
-  }, 1000);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleChange = (event) => {
+    setOption(event.target.value);
+  };
 
   return (
     <Box className="containers" component={Paper} elevation={3} p={3}>
@@ -90,9 +100,8 @@ function Scanner() {
                       onChange={handleChange}
                     >
                       <MenuItem value={10}>Equity</MenuItem>
-                      <MenuItem value={10}>indices</MenuItem>
                       <MenuItem value={20}>Options</MenuItem>
-                      <MenuItem value={30}>futures</MenuItem>
+                      <MenuItem value={30}>Futures</MenuItem>
                     </Select>
                   </FormControl>
                   <FormControl fullWidth>
@@ -104,18 +113,14 @@ function Scanner() {
                       label="Company"
                       onChange={handleChange}
                     >
-                      <MenuItem value={10}>Nefty</MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={10}>Equity</MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={10}>Indices</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
+                      <MenuItem value={10}>Nifty</MenuItem>
+                      <MenuItem value={20}>Bank Nifty</MenuItem>
+                      <MenuItem value={30}>Equity</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
               </FormControl>
-              <FormControl fullWidth margin="normal" sx={{mb:3}}>
+              <FormControl fullWidth margin="normal" sx={{ mb: 3 }}>
                 <Button variant="outlined" fullWidth>
                   Spot
                 </Button>
@@ -140,7 +145,7 @@ function Scanner() {
                 </FormControl>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={5} >
+            <Grid item xs={12} sm={5}>
               <Typography variant="h6">Operations</Typography>
               <Box display="flex" flexDirection="column">
                 <Box display="flex" justifyContent="space-between" mb={1}>
@@ -194,8 +199,8 @@ function Scanner() {
                 <Typography>Latest result</Typography>
               </Box>
               <Box>
-              <button className="action-buttons">Submit</button>
-              <button className="action-buttons">Save</button>
+                <button className="action-buttons">Submit</button>
+                <button className="action-buttons">Save</button>
               </Box>
             </Box>
           </Box>
@@ -205,7 +210,7 @@ function Scanner() {
         </>
       )}
     </Box>
-  )
+  );
 }
 
-export default Scanner
+export default Scanner;
